@@ -13,3 +13,13 @@ console.log("server running on port 3000..");
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
+
+//open connection to socket io 
+io.sockets.on('connection', function(socket){
+    connections.push(socket);
+    console.log('Connected: %s sockets connected', connections.length);
+
+    ///disconnect 
+    connections.slice(connections.indexOf(socket), 1);
+    console.log('Disconnected: %s sockets connected', connections.length);
+});
